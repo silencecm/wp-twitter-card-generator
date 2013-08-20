@@ -1,8 +1,8 @@
 <?php
 /**
- * Admin settings for the seo generator
+ * Admin settings for the Twitter Card Generator
  *
- * @package   Seo Generator
+ * @package   Twitter Card Generator
  * @author    Riley MacDonald <riley_macdonald@hotmail.com>
  * @license   GPL-2.0+
  * @link      http://rileymacdonald.ca
@@ -126,9 +126,7 @@ function get_card_type_options() {
 		'summary_large_image' => 'Large Image Summary',
 		'photo' => 'Photo',
 		'gallery' => 'Gallery',
-		'app' => 'App',
-		'player' => 'Player',
-		'product' => 'Product'
+		'app' => 'App'
 	);
 	foreach ( $values as $value => $val) :
 		?>
