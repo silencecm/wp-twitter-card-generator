@@ -332,6 +332,8 @@ class Twitter_Card_Generator {
 		<?php
 	}//end twitter_user_field
 
+	/** ADMIN SETTINGS FUNCTIONS **/
+
 	/**
 	* Save the custom twitter user meta data
 	*
@@ -340,4 +342,39 @@ class Twitter_Card_Generator {
 	public function twitter_save_user_field( $user_id ) {
 		update_usermeta( $user_id, 'twitter', $_POST['twitter'] );
 	}//end twitter_save_user_field
+
+	/**
+ * Get the media library files
+ *
+ * @since 1.0.1
+ */
+function get_media_library_images() {
+	$args = array(
+		'post_type' => 'attachment',
+    'post_mime_type' => 'image',
+    'post_status' => 'inherit',
+    'posts_per_page' => -1,
+	);
+	$query_images = get_posts( $args );
+	$images = array();
+	foreach ( $query_images as $image ) {
+		//Hide pictures larger then 1MB in size
+		if ( filesize( get_attached_file( $image->ID ) ) < 1000000 ) {
+			$images[] = $image;
+		}
+	}
+	return $images;
+}
+
+/**
+ * Display updated message at top of screen
+ *
+ * @since 1.0.1
+**/
+function update_message() { ?>
+	<div id="message" class="updated below-h2">
+		<p>Twitter Card Settings updated. Twitter Card Type set as <?php echo get_option('twitter-card-type'); ?></p>
+	</div>
+<?php
+}
 }//end class
