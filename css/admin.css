@@ -1,0 +1,16 @@
+/*Admin Page Styles*/
+.summary-settings, .summary_large_image-settings, .photo-settings, .gallery-settings, .app-settings, .player-settings, .product-settings {
+	display: none;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.app-input {
+	vertical-align: top;
+}
+
+input[type=text] {
+	width: 40%;
+}
