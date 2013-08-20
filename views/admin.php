@@ -2,14 +2,12 @@
 /**
  * Admin settings for the Twitter Card Generator
  *
- * @package   Twitter Card Generator
+ * @package   Twitter_Card_Generator
  * @author    Riley MacDonald <riley_macdonald@hotmail.com>
  * @license   GPL-2.0+
  * @link      http://rileymacdonald.ca
  * @copyright 2013 Riley MacDonald
  */
-//Access to main class
-require_once( plugin_dir_path( __FILE__ ) . 'class-twitter-card-generator.php' );
 
 $image_url = '';
 
@@ -65,42 +63,92 @@ if ( isset( $_POST['type'] ) ) {
 	update_message();
 }
 
-/**
- * Loop and display all the images from the media library in a selectable listbox
- *
- * @since 1.0.1
-*/
-function display_media_library_images() {
-	$imgs = get_media_library_images();
-	$first = true;
-	?>
-		<select class="twitter-image" name="listbox" size="10" style="height:100px; width:200px;"><?php
-				foreach ( $imgs as $img ) :
-			?>
-				<option value="<?php echo $img->guid; ?>">
-					<?php echo $img->post_title; ?>
-				</option>
-			<?php endforeach;?>
-		</select>
-	<?php
-}
+	/** ADMIN SETTINGS FUNCTIONS **/
 
-//Try and create the list items with a loop and select the one with the get option data
-function get_card_type_options() {
-	//Type Options
-	$values = array(
-		'summary' => 'Summary',
-		'summary_large_image' => 'Large Image Summary',
-		'photo' => 'Photo',
-		'gallery' => 'Gallery',
-		'app' => 'App'
-	);
-	foreach ( $values as $value => $val) :
+	/**
+	* Save the custom twitter user meta data
+	*
+	* @since 1.0.1
+	*/
+	function twitter_save_user_field( $user_id ) {
+		update_usermeta( $user_id, 'twitter', $_POST['twitter'] );
+	}//end twitter_save_user_field
+
+	/**
+	 * Get the media library files
+	 *
+	 * @since 1.0.1
+	 */
+	function get_media_library_images() {
+		$args = array(
+			'post_type' => 'attachment',
+	    'post_mime_type' => 'image',
+	    'post_status' => 'inherit',
+	    'posts_per_page' => -1,
+		);
+		$query_images = get_posts( $args );
+		$images = array();
+		foreach ( $query_images as $image ) {
+			//Hide pictures larger then 1MB in size
+			if ( filesize( get_attached_file( $image->ID ) ) < 1000000 ) {
+				$images[] = $image;
+			}
+		}
+		return $images;
+	}
+
+	/**
+	 * Display updated message at top of screen
+	 *
+	 * @since 1.0.1
+	 */
+	function update_message() { ?>
+		<div id="message" class="updated below-h2">
+			<p>Twitter Card Settings updated. Twitter Card Type set as <?php echo get_option('twitter-card-type'); ?></p>
+		</div>
+	<?php
+	}
+
+	/**
+	 * Loop and display all the images from the media library in a selectable listbox
+	 *
+	 * @since 1.0.1
+	 */
+	function display_media_library_images() {
+		$imgs = get_media_library_images();
+		$first = true;
 		?>
-			<li><input type="radio" name="type" value="<?php echo $value; ?>" <?php if ( $value == get_option( 'twitter-card-type' ) ) { echo 'checked'; } ?>/><?php echo $val; ?></li>
+			<select class="twitter-image" name="listbox" size="10" style="height:100px; width:200px;"><?php
+					foreach ( $imgs as $img ) :
+				?>
+					<option value="<?php echo $img->guid; ?>">
+						<?php echo $img->post_title; ?>
+					</option>
+				<?php endforeach;?>
+			</select>
 		<?php
-	endforeach;
-}
+	}
+
+	/**
+	* Loop through the card types and generate radio buttons
+	*
+	* @since 1.0.1
+	*/
+	function get_card_type_options() {
+		//Type Options
+		$values = array(
+			'summary' => 'Summary',
+			'summary_large_image' => 'Large Image Summary',
+			'photo' => 'Photo',
+			'gallery' => 'Gallery',
+			'app' => 'App'
+		);
+		foreach ( $values as $value => $val) :
+			?>
+				<li><input type="radio" name="type" value="<?php echo $value; ?>" <?php if ( $value == get_option( 'twitter-card-type' ) ) { echo 'checked'; } ?>/><?php echo $val; ?></li>
+			<?php
+		endforeach;
+	}
 ?>
 <div class="wrap">
 	<?php screen_icon(); ?>
