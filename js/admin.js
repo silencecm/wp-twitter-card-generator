@@ -10,7 +10,6 @@
 		$('.twitter-image').change(function() {
 			update_image()
 		});
-		//Radio Buttons
 		$('.' + $('input[name=type]:checked').val() + '-settings').show();
 		$('input[name=type]').change(function() {
 			var selected = $('input[name=type]:checked').val();
