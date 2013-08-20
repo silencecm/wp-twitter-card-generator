@@ -62,25 +62,9 @@ class Twitter_Card_Generator {
 	 * @since     1.0.1
 	 */
 	private function __construct() {
-		//Initialize
+		//Init
 		add_action( 'init', array( $this, 'init_setup') );
-
-		// Load plugin text domain
-		// add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-
-		// Load admin style sheet and JavaScript.
-		//add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
-		//add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
-
-		// Load public-facing style sheet and JavaScript.
-		//add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		//add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
-		// Define custom functionality. Read more about actions and filters: http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-
-		//add_filter( 'TODO', array( $this, 'filter_method_name' ) );
-
-	}
+	}//end constructor statement
 
 	/**
 	 * Return an instance of this class.
@@ -90,14 +74,13 @@ class Twitter_Card_Generator {
 	 * @return    object    A single instance of this class.
 	 */
 	public static function get_instance() {
-
 		// If the single instance hasn't been set, set it now.
 		if ( null == self::$instance ) {
 			self::$instance = new self;
 		}
 
 		return self::$instance;
-	}
+	}//end get_instance
 
 	/**
 	 * Fired when the plugin is activated.
@@ -107,8 +90,9 @@ class Twitter_Card_Generator {
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
 	 */
 	public static function activate( $network_wide ) {
-		//Define activiation functionality
-	}
+		//Init the plugin with summary card as the default card type
+		//TODO: update_option( 'twitter-card-type', 'summary' );
+	}//end activate
 
 	/**
 	 * Fired when the plugin is deactivated.
@@ -118,8 +102,9 @@ class Twitter_Card_Generator {
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Deactivate" action, false if WPMU is disabled or plugin is deactivated on an individual blog.
 	 */
 	public static function deactivate( $network_wide ) {
-		// TODO: Define deactivation functionality here
-	}
+		//Remove the database fields associated with this plugin
+		//TODO: delete_option( 'array of options used with this plugin' );
+	}//end deactivate
 
 	/**
 	 * Load the plugin text domain for translation.
@@ -127,13 +112,12 @@ class Twitter_Card_Generator {
 	 * @since    1.0.0
 	 */
 	public function load_plugin_textdomain() {
-
 		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 		load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
 		load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
-	}
+	}//end load_plugin_textdomain
 
 	/**
 	 * Register and enqueue admin-specific style sheet.
@@ -143,7 +127,6 @@ class Twitter_Card_Generator {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_styles() {
-
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}
@@ -152,8 +135,7 @@ class Twitter_Card_Generator {
 		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), $this->version );
 		}
-
-	}
+	}//end enque_admin_styles
 
 	/**
 	 * Register and enqueue admin-specific JavaScript.
@@ -163,7 +145,6 @@ class Twitter_Card_Generator {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
-
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}
@@ -172,8 +153,7 @@ class Twitter_Card_Generator {
 		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), $this->version );
 		}
-
-	}
+	}//end enqueue_admin_scripts
 
 	/**
 	 * Register and enqueue public-facing style sheet.
@@ -182,7 +162,7 @@ class Twitter_Card_Generator {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'css/public.css', __FILE__ ), array(), $this->version );
-	}
+	}//end enqueue_styles
 
 	/**
 	 * Register and enqueues public-facing JavaScript files.
@@ -191,7 +171,7 @@ class Twitter_Card_Generator {
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'js/public.js', __FILE__ ), array( 'jquery' ), $this->version );
-	}
+	}//end enqueue_scripts
 
 	/**
 	 * Render the settings page for this plugin.
@@ -203,7 +183,7 @@ class Twitter_Card_Generator {
 		include_once( 'views/admin.php' );
 		//Javascript
 		wp_enqueue_script( 'Twitter Card Generator', plugins_url() . '/' . $this->plugin_slug . '/js/admin.js');
-	}
+	}//end display_plugin_admin_page
 
 	/**
 	* Run through constructor to add actions
@@ -215,7 +195,7 @@ class Twitter_Card_Generator {
 		wp_enqueue_style( 'admin-styles', plugins_url( $this->plugin_slug . '/css/admin.css' ) );
 		//Add the seo tags to the header
 		add_action( 'wp_head', array( $this, 'generate_tags' ) );
-		//Add custom user field for twitter
+		//Add custom user field for twitter username
 		add_action( 'show_user_profile', array($this, 'twitter_user_field' ) );
 		add_action( 'edit_user_profile', array($this, 'twitter_user_field' ) );
 		//Save the custom twitter user information
@@ -230,7 +210,7 @@ class Twitter_Card_Generator {
 		add_action( 'load-post-new.php', array( $this, 'custom_meta_box_setup' ) );
 		//Allow featured images on posts
 		add_theme_support( 'post-thumbnails' );
-	}
+	}//end init_setup
 
 	/**
 	* Save custom meta boxes functions
@@ -239,11 +219,10 @@ class Twitter_Card_Generator {
 	*/
 	public function custom_meta_box_setup() {
 		//Add custom meta boxes here
-	}
-
+	}//end custom_meta_box_setup
 
 	/**
-	* Add the settings menu to the plugin
+	* Add the settings menu
 	*
 	* @since 1.0.1
 	*/
@@ -255,10 +234,10 @@ class Twitter_Card_Generator {
 			$this->plugin_slug,
 			array($this, 'display_plugin_admin_page' )
 		);
-	}
+	}//end twitter_card_generator_admin_menu
 
 	/**
-	* Adds the settings like to the plugin
+	* Adds the settings menu link to the plugin
 	*
 	* @since 1.0.1
 	*/
@@ -269,14 +248,10 @@ class Twitter_Card_Generator {
 	    ),
 	    $links
 	  );
-	}
+	}//end plugin_action_links
 
 	/**
-	 * NOTE:  Actions are points in the execution of a page or process
-	 *        lifecycle that WordPress fires.
-	 *
-	 *        WordPress Actions: http://codex.wordpress.org/Plugin_API#Actions
-	 *        Action Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
+	 * Generate Twitter Card meta tags based on the plugin settings
 	 *
 	 * @since    1.0.0
 	 */
@@ -284,8 +259,6 @@ class Twitter_Card_Generator {
 		global $post;
 		//Author
 		$author_id = $post->post_author;
-
-		//The post thumbnail
 		//If the post is of a post type generate the meta tags
 		if ( $post->post_type == 'post' ) :	?>
 			<meta name="twitter:card" content="<?php echo get_option( 'twitter-card-type' ); ?>" />
@@ -299,7 +272,7 @@ class Twitter_Card_Generator {
 						echo $post->post_title;
 					} else {
 					echo $post->post_title;
-					}
+					}//end if
 				?>" />
 				<?php if ( get_option( 'twitter-card-type' ) != 'photo' ) : ?>
 					<meta name="twitter:description" content="<?php echo $post->post_excerpt; ?>"/>
@@ -335,7 +308,8 @@ class Twitter_Card_Generator {
 				<meta name="twitter:app:country" content="<?php echo get_option( 'twitter-app-country' ); ?>" />
 			<?php endif; //end app card if ?>
 		<?php endif; //end $post->post_type if
-	}
+	}//end generate_tags
+
 	/**
 	* Add twitter information to the user profile admin screen
 	*
@@ -356,7 +330,7 @@ class Twitter_Card_Generator {
 			</tbody>
 		</table>
 		<?php
-	}
+	}//end twitter_user_field
 
 	/**
 	* Save the custom twitter user meta data
@@ -365,19 +339,5 @@ class Twitter_Card_Generator {
 	*/
 	public function twitter_save_user_field( $user_id ) {
 		update_usermeta( $user_id, 'twitter', $_POST['twitter'] );
-	}
-
-	/**
-	 * NOTE:  Filters are points of execution in which WordPress modifies data
-	 *        before saving it or sending it to the browser.
-	 *
-	 *        WordPress Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *        Filter Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function filter_method_name() {
-		// TODO: Define your filter hook callback here
-	}
-
-}
+	}//end twitter_save_user_field
+}//end class
