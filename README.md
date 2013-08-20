@@ -1,4 +1,4 @@
-# SEO Generator #
+# Twitter Card Generator #
 
 Contributors: Riley MacDonald
 Developer Link: http://rileymacdonald.ca
