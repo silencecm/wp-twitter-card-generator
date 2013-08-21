@@ -90,8 +90,10 @@ class Twitter_Card_Generator {
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
 	 */
 	public static function activate( $network_wide ) {
-		//Init the plugin with summary card as the default card type
-		//TODO: update_option( 'twitter-card-type', 'summary' );
+		//Check if the plugin has existing options set in the database
+		if ( !get_option( 'twitter-card-type' ) ) {
+			update_option( 'twitter-card-type', 'summary' );
+		}
 	}//end activate
 
 	/**
