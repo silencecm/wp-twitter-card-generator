@@ -60,54 +60,8 @@ if ( isset( $_POST['type'] ) ) {
 			update_option( 'twitter-app-country', $_POST['app-country'] );
 		}
 	}
-	update_message();
+	Twitter_Card_Generator::update_message();
 }
-
-	/** ADMIN SETTINGS FUNCTIONS **/
-
-	/**
-	* Save the custom twitter user meta data
-	*
-	* @since 1.0.1
-	*/
-	function twitter_save_user_field( $user_id ) {
-		update_usermeta( $user_id, 'twitter', $_POST['twitter'] );
-	}//end twitter_save_user_field
-
-	/**
-	 * Get the media library files
-	 *
-	 * @since 1.0.1
-	 */
-	function get_media_library_images() {
-		$args = array(
-			'post_type' => 'attachment',
-	    'post_mime_type' => 'image',
-	    'post_status' => 'inherit',
-	    'posts_per_page' => -1,
-		);
-		$query_images = get_posts( $args );
-		$images = array();
-		foreach ( $query_images as $image ) {
-			//Hide pictures larger then 1MB in size
-			if ( filesize( get_attached_file( $image->ID ) ) < 1000000 ) {
-				$images[] = $image;
-			}
-		}
-		return $images;
-	}
-
-	/**
-	 * Display updated message at top of screen
-	 *
-	 * @since 1.0.1
-	 */
-	function update_message() { ?>
-		<div id="message" class="updated below-h2">
-			<p>Twitter Card Settings updated. Twitter Card Type set as <?php echo get_option('twitter-card-type'); ?></p>
-		</div>
-	<?php
-	}
 
 	/**
 	 * Loop and display all the images from the media library in a selectable listbox
@@ -115,7 +69,7 @@ if ( isset( $_POST['type'] ) ) {
 	 * @since 1.0.1
 	 */
 	function display_media_library_images() {
-		$imgs = get_media_library_images();
+		$imgs = Twitter_Card_Generator::get_media_library_images();
 		$first = true;
 		?>
 			<select class="twitter-image" name="listbox" size="10" style="height:100px; width:200px;"><?php
@@ -127,27 +81,6 @@ if ( isset( $_POST['type'] ) ) {
 				<?php endforeach;?>
 			</select>
 		<?php
-	}
-
-	/**
-	* Loop through the card types and generate radio buttons
-	*
-	* @since 1.0.1
-	*/
-	function get_card_type_options() {
-		//Type Options
-		$values = array(
-			'summary' => 'Summary',
-			'summary_large_image' => 'Large Image Summary',
-			'photo' => 'Photo',
-			'gallery' => 'Gallery',
-			'app' => 'App'
-		);
-		foreach ( $values as $value => $val) :
-			?>
-				<li><input type="radio" name="type" value="<?php echo $value; ?>" <?php if ( $value == get_option( 'twitter-card-type' ) ) { echo 'checked'; } ?>/><?php echo $val; ?></li>
-			<?php
-		endforeach;
 	}
 ?>
 <div class="wrap">
@@ -163,7 +96,7 @@ if ( isset( $_POST['type'] ) ) {
 		<div>
 			<h4>Twitter Card Type</h4>
 			<ul>
-				<?php get_card_type_options(); ?>
+				<?php Twitter_Card_Generator::get_card_type_options(); ?>
 			</ul>
 			<hr/>
 		</div>
@@ -175,6 +108,9 @@ if ( isset( $_POST['type'] ) ) {
 					<span class="bold">The image used must be larger than 60x60 px in size</span>. Set the desired image for your post by using the "featured image" panel found in the create/edit post screen.<br/>
 					You can set a default image to use below for posts which do not have a featured image set.<br/>
 					Images larger then 1MB cannot be used, and will not appear in the list below.
+				</div><br/>
+				<div>
+					<img src="../wp-content/plugins/twitter-card-generator/assets/images/web_summary.png"/>
 				</div>
 				<table class="form-table">
 					<tbody>
@@ -211,6 +147,9 @@ if ( isset( $_POST['type'] ) ) {
 					The image used must be a <span class="bold">minimum width of 280px, and a minimum height of 150px.</span><br/>
 					If the image does not meet the size specifications the card will appear without an image attached.<br/>
 					Images larger then 1MB cannot be used, and will not appear in the list below.
+				</div><br/>
+				<div>
+					<img src="../wp-content/plugins/twitter-card-generator/assets/images/web_summary_large.png"/>
 				</div>
 				<table class="form-table">
 					<tbody>
@@ -252,6 +191,9 @@ if ( isset( $_POST['type'] ) ) {
 					</ul>
 					The image must be <span class="bold">a minimum size of 280px wide by 150px tall.</span> Images which are more the 1MB in file size cannot be used, and will not appear in the list below.<br/>
 					Animated GIF's are not supported.
+				</div><br/>
+				<div>
+					<img src="../wp-content/plugins/twitter-card-generator/assets/images/web_photo.png"/>
 				</div>
 				<table class="form-table">
 					<tbody>
@@ -289,6 +231,9 @@ if ( isset( $_POST['type'] ) ) {
 					This Card type is designed to let the user know that there's more than just a single image at the URL shared, but rather a gallery of related images.<br/>
 					Add media to your post using the "Add Media" button. The first four images will be featured in the Twitter Gallery Card.<br/><br/>
 					If unwanted images are appearing in your card, check to ensure there are no images attached to your post in WordPress media menu.
+				</div><br/>
+				<div>
+					<img src="../wp-content/plugins/twitter-card-generator/assets/images/web_gallery.png"/>
 				</div>
 			</div>
 			<div class="app-settings set">
@@ -297,6 +242,11 @@ if ( isset( $_POST['type'] ) ) {
 					App Card is a great way to better represent mobile applications on Twitter and to drive installs.<br/>
 					Use this card to showcase your application by providing information about the application below.<br/>
 					This Card type is currently only available on the iOS and Android mobile clients. It is not yet available on web or mobile web.<br/><br/>
+				</div><br/>
+				<div>
+					<img src="../wp-content/plugins/twitter-card-generator/assets/images/ios_app.png"/>
+				</div>
+				<div>
 					* Required
 				</div>
 				<div>
