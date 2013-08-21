@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name: Twitter Card Generator
- * Plugin URI:  https://github.com/silencecm
+ * Plugin URI:  https://github.com/silencecm/wp-twitter-card-generator
  * Description: Generate meta tags for single posts
  * Version:     1.0.1
  * Author:      Riley MacDonald
