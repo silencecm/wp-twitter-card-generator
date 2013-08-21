@@ -14,3 +14,13 @@
 input[type=text] {
 	width: 40%;
 }
+
+.twitter-image {
+	height: 100px !important;
+	width: 200px;
+}
+
+.twitter-image-box {
+	height: 100px;
+	width: 100px;
+}

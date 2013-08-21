@@ -72,7 +72,7 @@ if ( isset( $_POST['type'] ) ) {
 		$imgs = Twitter_Card_Generator::get_media_library_images();
 		$first = true;
 		?>
-			<select class="twitter-image" name="listbox" size="10" style="height:100px; width:200px;"><?php
+			<select class="twitter-image" name="listbox" size="10"><?php
 					foreach ( $imgs as $img ) :
 				?>
 					<option value="<?php echo $img->guid; ?>">
@@ -134,7 +134,7 @@ if ( isset( $_POST['type'] ) ) {
 								</div>
 							</td>
 							<td style="vertical-align:top;">
-								Current Thumbnail: &nbsp; <img src="<?php echo get_option('twitter-summary-image'); ?>" class="twitter-image-box" style="height:100px; width:100px;" />
+								Current Thumbnail: &nbsp; <img src="<?php echo get_option('twitter-summary-image'); ?>" class="twitter-image-box" />
 							</td>
 						</tr>
 					</tbody>
@@ -173,7 +173,7 @@ if ( isset( $_POST['type'] ) ) {
 								</div>
 							</td>
 							<td style="vertical-align:top;">
-								Current Thumbnail: &nbsp; <img src="<?php echo get_option('twitter-summary-image'); ?>" class="twitter-image-box" style="height:100px; width:100px;" />
+								Current Thumbnail: &nbsp; <img src="<?php echo get_option('twitter-summary-image'); ?>" class="twitter-image-box" />
 							</td>
 						</tr>
 					</tbody>
@@ -218,7 +218,7 @@ if ( isset( $_POST['type'] ) ) {
 								</div>
 							</td>
 							<td style="vertical-align:top;">
-								Current Thumbnail: &nbsp; <img src="<?php echo get_option('twitter-summary-image'); ?>" class="twitter-image-box" style="height:100px; width:100px;" />
+								Current Thumbnail: &nbsp; <img src="<?php echo get_option('twitter-summary-image'); ?>" class="twitter-image-box" />
 							</td>
 						</tr>
 					</tbody>
