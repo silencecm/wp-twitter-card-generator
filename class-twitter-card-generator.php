@@ -331,4 +331,80 @@ class Twitter_Card_Generator {
 		</table>
 		<?php
 	}//end twitter_user_field
+
+	/**
+	* Save the custom twitter user meta data
+	*
+	* @since 1.0.1
+	*/
+	public function twitter_save_user_field( $user_id ) {
+		update_usermeta( $user_id, 'twitter', $_POST['twitter'] );
+	}//end twitter_save_user_field
+
+ /**
+	* Get an asset
+	*
+	* @since 1.0.1
+	*/
+	public function get_asset( $name ) {
+		$file = plugin_dir_path( __FILE__ ) . $this->plugin_slug . '/assets/images/' . $name;
+		return $file;
+	}//end get_asset
+
+	/*Admin Functions*/
+		/**
+	 * Display updated message at top of screen
+	 *
+	 * @since 1.0.1
+	 */
+	public function update_message() { ?>
+		<div id="message" class="updated below-h2">
+			<p>Twitter Card Settings updated. Twitter Card Type set as <?php echo get_option('twitter-card-type'); ?></p>
+		</div>
+	<?php
+	}//end update_message
+
+		/**
+	 * Get the media library files
+	 *
+	 * @since 1.0.1
+	 */
+	public function get_media_library_images() {
+		$args = array(
+			'post_type' => 'attachment',
+	    'post_mime_type' => 'image',
+	    'post_status' => 'inherit',
+	    'posts_per_page' => -1,
+		);
+		$query_images = get_posts( $args );
+		$images = array();
+		foreach ( $query_images as $image ) {
+			//Hide pictures larger then 1MB in size
+			if ( filesize( get_attached_file( $image->ID ) ) < 1000000 ) {
+				$images[] = $image;
+			}
+		}
+		return $images;
+	}//end get_media_library_images
+
+		/**
+	* Loop through the card types and generate radio buttons
+	*
+	* @since 1.0.1
+	*/
+	public function get_card_type_options() {
+		//Type Options
+		$values = array(
+			'summary' => 'Summary',
+			'summary_large_image' => 'Large Image Summary',
+			'photo' => 'Photo',
+			'gallery' => 'Gallery',
+			'app' => 'App'
+		);
+		foreach ( $values as $value => $val) :
+			?>
+				<li><input type="radio" name="type" value="<?php echo $value; ?>" <?php if ( $value == get_option( 'twitter-card-type' ) ) { echo 'checked'; } ?>/><?php echo $val; ?></li>
+			<?php
+		endforeach;
+	}//end get_card_type_options
 }//end class
