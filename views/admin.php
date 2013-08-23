@@ -110,7 +110,7 @@ if ( isset( $_POST['type'] ) ) {
 					Images larger then 1MB cannot be used, and will not appear in the list below.
 				</div><br/>
 				<div>
-					<img src="../wp-content/plugins/twitter-card-generator/assets/images/web_summary.png"/>
+					<img src="../wp-content/plugins/twitter-card-generator/images/web_summary.png"/>
 				</div>
 				<table class="form-table">
 					<tbody>
@@ -149,7 +149,7 @@ if ( isset( $_POST['type'] ) ) {
 					Images larger then 1MB cannot be used, and will not appear in the list below.
 				</div><br/>
 				<div>
-					<img src="../wp-content/plugins/twitter-card-generator/assets/images/web_summary_large.png"/>
+					<img src="../wp-content/plugins/twitter-card-generator/images/web_summary_large.png"/>
 				</div>
 				<table class="form-table">
 					<tbody>
@@ -193,7 +193,7 @@ if ( isset( $_POST['type'] ) ) {
 					Animated GIF's are not supported.
 				</div><br/>
 				<div>
-					<img src="../wp-content/plugins/twitter-card-generator/assets/images/web_photo.png"/>
+					<img src="../wp-content/plugins/twitter-card-generator/images/web_photo.png"/>
 				</div>
 				<table class="form-table">
 					<tbody>
@@ -233,7 +233,7 @@ if ( isset( $_POST['type'] ) ) {
 					If unwanted images are appearing in your card, check to ensure there are no images attached to your post in WordPress media menu.
 				</div><br/>
 				<div>
-					<img src="../wp-content/plugins/twitter-card-generator/assets/images/web_gallery.png"/>
+					<img src="../wp-content/plugins/twitter-card-generator/images/web_gallery.png"/>
 				</div>
 			</div>
 			<div class="app-settings set">
@@ -244,7 +244,7 @@ if ( isset( $_POST['type'] ) ) {
 					This Card type is currently only available on the iOS and Android mobile clients. It is not yet available on web or mobile web.<br/><br/>
 				</div><br/>
 				<div>
-					<img src="../wp-content/plugins/twitter-card-generator/assets/images/ios_app.png"/>
+					<img src="../wp-content/plugins/twitter-card-generator/images/ios_app.png"/>
 				</div>
 				<div>
 					* Required
