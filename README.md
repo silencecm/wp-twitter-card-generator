@@ -1,11 +1,11 @@
 # Twitter Card Generator #
 
 Contributors: Riley MacDonald
-Developer Link: http://www.rileymacdonald.ca
+Developer Link: [rileymacdonald.ca](http://www.rileymacdonald.ca)
 Tags: Meta, Tags, Twitter, Cards, Summary, Photo, Gallery, App
 Requires at least: 3.5.1
 Tested up to: 3.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 This is my first WordPress plugin. It generates Twitter meta tags for regular WordPress post types.
 To configure which type of twitter card the plugin will generate, visit the plugin settings page.
-More information about Twitter Cards can be Found [Here]{https://dev.twitter.com/docs/cards}.
+More information about Twitter Cards can be Found [Here](https://dev.twitter.com/docs/cards).
 
 The current supported types of twitter cards are:
 - Summary Card
@@ -81,7 +81,7 @@ The instructions for each card are as follows:
 
 ### Twitter Validation ###
 Your Twitter Card must be validated by Twitter in order to work correctly.
-You can test and validate your Twitter Card using the [Validator]{https://dev.twitter.com/docs/cards/validation/validator}
+You can test and validate your Twitter Card using the [Validator](https://dev.twitter.com/docs/cards/validation/validator)
 
 ## Frequently Asked Questions ##
 Q: My Twitter Card is not working.
