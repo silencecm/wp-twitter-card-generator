@@ -2,7 +2,7 @@
 
 Contributors: Riley MacDonald
 Donate link: http://rileymacdonald.ca
-Tags: Meta, Tags, Twitter, Cards, Summary, Photo, Gallery, App
+Tags: Meta, Tags, Twitter, Cards, Card, Twitter Cards, Tweet, Summary, Photo, Gallery, App
 Requires at least: 3.5.1
 Tested up to: 3.6
 Stable tag: 1.0.1
