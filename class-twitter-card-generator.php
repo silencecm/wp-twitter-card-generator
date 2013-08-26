@@ -1,16 +1,16 @@
 <?php
 /**
- * Plugin Name.
+ * Twitter Plugin Generator
  *
  * @package   Twitter_Card_Generator
  * @author    Riley MacDonald <riley_macdonald@hotmail.com>
  * @license   GPL-2.0+
- * @link      http://rileymacdonald.ca
- * @copyright 2013 Riley MacDonald
+ * @link      https://github.com/silencecm/wp-twitter-card-generator
+ * @copyright 2013 theRedSpace
  */
 
 /**
- * Plugin class.
+ * Twitter Card Generator Class.
  *
  * @package Twitter_Card_Generator
  * @author  Riley MacDonald <riley_macdonald@hotmail.com>
@@ -18,19 +18,16 @@
 class Twitter_Card_Generator {
 
 	/**
-	 * Plugin version, used for cache-busting of style and script file references.
+	 * Version
 	 *
 	 * @since   1.0.0
 	 *
 	 * @var     string
 	 */
-	protected $version = '1.0.0';
+	protected $version = '1.0.1';
 
 	/**
-	 * Unique identifier for your plugin.
-	 *
-	 * Use this value (not the variable name) as the text domain when internationalizing strings of text. It should
-	 * match the Text Domain file header in the main plugin file.
+	 * Identifier : Twitter Card Generator
 	 *
 	 * @since    1.0.0
 	 *
@@ -39,7 +36,7 @@ class Twitter_Card_Generator {
 	protected $plugin_slug = 'twitter-card-generator';
 
 	/**
-	 * Instance of this class.
+	 * Class Instance
 	 *
 	 * @since    1.0.0
 	 *
@@ -48,7 +45,7 @@ class Twitter_Card_Generator {
 	protected static $instance = null;
 
 	/**
-	 * Slug of the plugin screen.
+	 * Slug of the plugin screen
 	 *
 	 * @since    1.0.0
 	 *
@@ -83,7 +80,6 @@ class Twitter_Card_Generator {
 	}//end get_instance
 
 	/**
-	 * Fired when the plugin is activated.
 	 *
 	 * @since    1.0.0
 	 *
@@ -97,15 +93,13 @@ class Twitter_Card_Generator {
 	}//end activate
 
 	/**
-	 * Fired when the plugin is deactivated.
 	 *
 	 * @since    1.0.0
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Deactivate" action, false if WPMU is disabled or plugin is deactivated on an individual blog.
 	 */
 	public static function deactivate( $network_wide ) {
-		//Remove the database fields associated with this plugin
-		//TODO: delete_option( 'array of options used with this plugin' );
+
 	}//end deactivate
 
 	/**
@@ -220,7 +214,7 @@ class Twitter_Card_Generator {
 	* @since 1.0.1
 	*/
 	public function custom_meta_box_setup() {
-		//Add custom meta boxes here
+
 	}//end custom_meta_box_setup
 
 	/**

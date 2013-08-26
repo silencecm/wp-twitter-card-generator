@@ -4,16 +4,16 @@
  * @package   Twitter_Card_Generator
  * @author    Riley MacDonald <riley_macdonald@hotmail.com>
  * @license   GPL-2.0+
- * @link      http://rileymacdonald.ca
- * @copyright 2013 Riley MacDonald
+ * @link      http://www.theredspace.com/
+ * @copyright 2013 theRedSpace
  *
  * @wordpress-plugin
  * Plugin Name: Twitter Card Generator
  * Plugin URI:  https://github.com/silencecm/wp-twitter-card-generator
- * Description: Generate meta tags for single posts
+ * Description: Generate Twitter Cards for tweets linking posts
  * Version:     1.0.1
- * Author:      Riley MacDonald
- * Author URI:  http://rileymacdonald.ca
+ * Author:      theRedSpace
+ * Author URI:  http://www.theredspace.com/
  * Text Domain: plugin-name-locale
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt

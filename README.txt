@@ -1,7 +1,7 @@
 === Twitter Card Generator ===
 
 Contributors: Riley MacDonald
-Donate link: http://rileymacdonald.ca
+Donate link: http://www.theredspace.com/
 Tags: Meta, Tags, Twitter, Cards, Card, Twitter Cards, Tweet, Summary, Photo, Gallery, App
 Requires at least: 3.5.1
 Tested up to: 3.6
